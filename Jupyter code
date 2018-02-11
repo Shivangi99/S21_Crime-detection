@@ -1,0 +1,20 @@
+# This line tells the notebook to show plots inside of the notebook
+%matplotlib inline
+
+import matplotlib.pyplot as plt
+import seaborn as sb
+
+# We have to temporarily drop the rows with 'NA' values
+# because the Seaborn plotting function does not know
+# what to do with them
+sb.pairplot(iris_data.dropna(), hue='class')
+
+mport pandas as pd
+pd.set_option('display.height', 1000)
+pd.set_option('display.max_rows', 1000)
+pd.set_option('display.max_columns', 10000)
+pd.set_option('display.width', 1000)
+
+wb_sales = pd.ExcelFile(r"Downloads\crimedata.xlsx")
+iris_data = pd.read_excel(r"Downloads\crimedata.xlsx")
+iris_data.head()
