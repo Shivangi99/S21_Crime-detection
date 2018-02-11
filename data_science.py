@@ -57,21 +57,17 @@ for row in poverty:
 #print poverty_data
 
 ###check no of districts in each table
-row_count_edu = 0
-row_count_crimes = 0
-row_count_poverty = 0
-
-for row in edu_data:
-    row_count_edu += 1
-#print row_count_edu
-
-for row in crime_data:
-    row_count_crimes += 1
-#print row_count_crimes
     
-for row in poverty_data:
-    row_count_poverty += 1
-#print row_count_poverty
+def count_row(table):
+    count = 0
+    for row in table:
+        count += 1
+    #print count
+    return count
+
+row_count_edu = count_row(edu_data)
+row_count_crimes = count_row(crime_data)
+row_count_poverty = count_row(poverty_data)
 
 ###taking only districts common to both the table of datas
 combined_data = [['STATE', 'DISTRICT', 'NO. OF CRIMES', 'LITERACY PERCENTAGE']]
@@ -91,12 +87,8 @@ for row_crime in crime_data:
 #for j in range(0,450):
     #print combined_data[j]
 
-row_count_data = 0
-
-for row in combined_data:
-    row_count_data += 1
-#print row_count_data
-            
+row_count_data = count_row(combined_data)
+         
 ###no of datas in which literacy percent doesnt have a valid value, ie less than or equal to 100
 
 check =[]
@@ -146,12 +138,8 @@ for row_pov in pov:
             new_comb_data.append(new)
         new = []
             
-row_count_new = 0
+row_count_new = count_row(new_comb_data)
 
-for row in new_comb_data:
-    row_count_new += 1
-#print row_count_new
-    
 for j in range(0,417):
     print new_comb_data[j]
     
