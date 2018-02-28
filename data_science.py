@@ -367,19 +367,23 @@ for row in  calc_data:
 for row in  calc_data:
     bpl.append(row[4])
     
-plt.bar(lit,crime)
-plt.show()
-plt.bar(bpl,crime)
-plt.show()
-plt.scatter(bpl,lit)
-plt.show()
-plt.scatter(lit,bpl)
-plt.show()
-plt.hist(crime, bins = 20)
-plt.show()
-plt.hist(lit, bins = 20)
-plt.show()
-plt.hist(bpl, bins = 20)
-plt.show()
+#plt.bar(bpl,lit)
+#plt.show()
+#plt.bar(bpl,crime)
+#plt.show()
+#plt.scatter(bpl,lit)
+#plt.show()
+#plt.scatter(lit,bpl)
+#plt.show()
+#plt.hist(crime, bins = 20)
+#plt.show()
+#plt.hist(lit, bins = 20)
+#plt.show()
+#plt.hist(bpl, bins = 20)
+#plt.show()
 
+csvfile = "C:\Users\Lenovo\Anaconda2\Final.csv"
+with open(csvfile, "w") as output:
+    writer = csv.writer(output, lineterminator='\n')
+    writer.writerows(new_comb_data)
 
