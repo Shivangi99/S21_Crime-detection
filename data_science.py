@@ -1,14 +1,24 @@
 # -*- coding: utf-8 -*-
 """
+Created on Thu Mar 22 20:41:41 2018
+
+@author: Lenovo
+"""
+
+# -*- coding: utf-8 -*-
+"""
 Spyder Editor
 
 This is a temporary script file.
 """
 
 import csv
-import pandas as pd
+#import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
+#import matplotlib.patches as pat
+from mpl_toolkits.mplot3d import Axes3D
+from matplotlib import cm
 
 def file_open(string):
     
@@ -17,9 +27,9 @@ def file_open(string):
     return list(r)
 
 ###reading the data
-crimes = file_open('C:\Users\Lenovo\Anaconda2\data_crimes.csv')
-education = file_open('C:\Users\Lenovo\Anaconda2\data_education.csv')
-poverty = file_open('C:\Users\Lenovo\Anaconda2\data_poverty.csv')
+crimes = file_open(r'C:\Users\Lenovo\Anaconda2\data_crimes.csv')
+education = file_open(r'C:\Users\Lenovo\Anaconda2\data_education.csv')
+poverty = file_open(r'C:\Users\Lenovo\Anaconda2\data_poverty.csv')
 
 #print crimes
 #print education
@@ -99,7 +109,7 @@ check.pop(0)
 count1 = 0
 for row in check:
     if float(row[3]) > 100.0:
-        print "data invalid"
+        print ("data invalid")
         count1 += 1
 #print count1
         
@@ -115,7 +125,7 @@ for row in pov:
     if value <= 100:
         row[1] = value
     else:
-        print "data invalid"
+        print ("data invalid")
         count2 += 1
 #print count2
 
@@ -141,10 +151,9 @@ for row_pov in pov:
 row_count_new = count_row(new_comb_data)
 
 for j in range(0,417):
-    print new_comb_data[j]
+    print (new_comb_data[j])
     
 ### python always works with addresses
-### .append does not allow repetition
 
 ###creating a table without the header
 calc_data =[]
@@ -170,7 +179,7 @@ def mean_crimes():
     return mean
 
 mean_crimes = mean_crimes()
-print 'Mean no of crimes in an Indian district in a certain year is '+ str(mean_crimes)
+print ('Mean no of crimes in an Indian district in a certain year is '+ str(mean_crimes))
 
 ###calculating lowest and highest no of crimes and respective district and state
 def highest_crimes():
@@ -182,7 +191,7 @@ def highest_crimes():
             no_of_crimes = row[2]
             district = row[1]
             state = row[0]
-    print 'The highest no of crimes committed in that year is in the district of ' + district + ' in the state of ' + state + ' and the no is ' + str(no_of_crimes)
+    print ('The highest no of crimes committed in that year is in the district of ' + district + ' in the state of ' + state + ' and the no is ' + str(no_of_crimes))
     return no_of_crimes
 
 highest_crimes = highest_crimes()
@@ -196,7 +205,7 @@ def lowest_crimes(x):
             no_of_crimes = row[2]
             district = row[1]
             state = row[0]
-    print 'The lowest no of crimes committed in that year is in the district of ' + district + ' in the state of ' + state + ' and the no is ' + str(no_of_crimes)
+    print ('The lowest no of crimes committed in that year is in the district of ' + district + ' in the state of ' + state + ' and the no is ' + str(no_of_crimes))
     return no_of_crimes
 
 lowest_crimes = lowest_crimes(mean_crimes)
@@ -211,7 +220,7 @@ def lower_than_mean(x):
     return count_dist
 
 lower_than_mean = lower_than_mean(mean_crimes)
-print 'No of districts with crime rate below the mean rate is ' + str(lower_than_mean)
+print ('No of districts with crime rate below the mean rate is ' + str(lower_than_mean))
 
 def higher_than_mean(x):
     count_dist = 0
@@ -221,10 +230,10 @@ def higher_than_mean(x):
     return count_dist
 
 higher_than_mean = higher_than_mean(mean_crimes)
-print 'No of districts with crime rate higher the mean rate is ' + str(higher_than_mean)
+print ('No of districts with crime rate higher the mean rate is ' + str(higher_than_mean))
 
 if row_count_new - 1 == lower_than_mean + higher_than_mean:
-    print 'Total no of districs considered in analysis is ' + str(lower_than_mean + higher_than_mean)
+    print ('Total no of districs considered in analysis is ' + str(lower_than_mean + higher_than_mean))
 ###256 + 160 = 416. no missing data
     
 ###finding mean literacy and BPL percent
@@ -238,7 +247,7 @@ def mean_literacy():
     return mean
 
 mean_literacy = mean_literacy()
-print 'Mean literacy rate in an Indian district in a certain year is '+ str(mean_literacy) + '%'
+print ('Mean literacy rate in an Indian district in a certain year is '+ str(mean_literacy) + '%')
 
 def mean_BPL():
     sum_BPL = 0
@@ -250,7 +259,7 @@ def mean_BPL():
     return mean
 
 mean_BPL = mean_BPL()
-print 'Mean BPL percent population in an Indian district in a certain year is '+ str(mean_BPL) + '%'
+print ('Mean BPL percent population in an Indian district in a certain year is '+ str(mean_BPL) + '%')
 
 ###no of districts below and above mean literacy %
 def lit_lower_than_mean(x):
@@ -261,7 +270,7 @@ def lit_lower_than_mean(x):
     return count_dist
 
 lit_lower_than_mean = lit_lower_than_mean(mean_literacy)
-print 'No of districts with literacy rate below the mean rate is ' + str(lit_lower_than_mean)
+print ('No of districts with literacy rate below the mean rate is ' + str(lit_lower_than_mean))
 
 def lit_higher_than_mean(x):
     count_dist = 0
@@ -271,10 +280,10 @@ def lit_higher_than_mean(x):
     return count_dist
 
 lit_higher_than_mean = lit_higher_than_mean(mean_literacy)
-print 'No of districts with literacy rate higher the mean rate is ' + str(lit_higher_than_mean)
+print ('No of districts with literacy rate higher the mean rate is ' + str(lit_higher_than_mean))
 
 if row_count_new - 1 != lit_lower_than_mean + lit_higher_than_mean:
-    print 'data missing'
+    print ('data missing')
     
 ###no of districts below and above mean BPL %
 def bpl_lower_than_mean(x):
@@ -285,7 +294,7 @@ def bpl_lower_than_mean(x):
     return count_dist
 
 bpl_lower_than_mean = bpl_lower_than_mean(mean_BPL)
-print 'No of districts with BPL % below the mean % is ' + str(bpl_lower_than_mean)
+print ('No of districts with BPL % below the mean % is ' + str(bpl_lower_than_mean))
 
 def bpl_higher_than_mean(x):
     count_dist = 0
@@ -295,10 +304,10 @@ def bpl_higher_than_mean(x):
     return count_dist
 
 bpl_higher_than_mean = bpl_higher_than_mean(mean_BPL)
-print 'No of districts with BPL % higher the mean rate is ' + str(bpl_higher_than_mean)
+print ('No of districts with BPL % higher the mean rate is ' + str(bpl_higher_than_mean))
 
 if row_count_new - 1 != bpl_lower_than_mean + bpl_higher_than_mean:
-    print 'data missing'
+    print ('data missing')
     
 ###highest and lowest literacy and BPL %
 def highest_literacy():
@@ -310,7 +319,7 @@ def highest_literacy():
             lit_percent = row[3]
             district = row[1]
             state = row[0]
-    print 'The highest literacy percentage in that year is in the district of ' + district + ' in the state of ' + state + ' and the no is ' + str(lit_percent)
+    print ('The highest literacy percentage in that year is in the district of ' + district + ' in the state of ' + state + ' and the no is ' + str(lit_percent))
     return lit_percent
 
 highest_literacy = highest_literacy()
@@ -324,7 +333,7 @@ def lowest_literacy(x):
             lit_percent = row[3]
             district = row[1]
             state = row[0]
-    print 'The lowest literacy percentage in that year is in the district of ' + district + ' in the state of ' + state + ' and the no is ' + str(lit_percent)
+    print ('The lowest literacy percentage in that year is in the district of ' + district + ' in the state of ' + state + ' and the no is ' + str(lit_percent))
     return lit_percent
 
 lowest_literacy = lowest_literacy(mean_literacy)
@@ -338,7 +347,7 @@ def highest_bpl_percent():
             bpl_percent = row[4]
             district = row[1]
             state = row[0]
-    print 'The highest bpl percentage in that year is in the district of ' + district + ' in the state of ' + state + ' and the no is ' + str(bpl_percent)
+    print ('The highest bpl percentage in that year is in the district of ' + district + ' in the state of ' + state + ' and the no is ' + str(bpl_percent))
     return bpl_percent
 
 highest_bpl_percent = highest_bpl_percent()
@@ -352,7 +361,7 @@ def lowest_bpl_percent(x):
             bpl_percent = row[4]
             district = row[1]
             state = row[0]
-    print 'The lowest bpl percentage in that year is in the district of ' + district + ' in the state of ' + state + ' and the no is ' + str(bpl_percent)
+    print ('The lowest bpl percentage in that year is in the district of ' + district + ' in the state of ' + state + ' and the no is ' + str(bpl_percent))
     return bpl_percent
 
 lowest_bpl_percent = lowest_bpl_percent(mean_BPL)
@@ -360,20 +369,46 @@ lowest_bpl_percent = lowest_bpl_percent(mean_BPL)
 crime = []
 lit = []
 bpl = []
+district = []
+state = []
 for row in  calc_data:
-    crime.append(row[2])
+    crime.append(row[2]/100)
 for row in  calc_data:
     lit.append(row[3])
 for row in  calc_data:
     bpl.append(row[4])
+for row in  calc_data:
+    district.append(row[1])
+for row in  calc_data:
+    state.append(row[0])
     
+districts = count_row(district)
+print ('The no. of districts we have considered is ' + str(districts))
+
+x = np.arange(len(district))
+
+###plotting data
+
+fig = plt.figure()
+ax = fig.add_subplot(111, projection='3d')
+Lit, Bpl = np.meshgrid(lit, bpl)
+surf = ax.plot_surface(Lit, Bpl, crime, cmap=cm.seismic, linewidth=0, antialiased=False)
+fig.colorbar(surf, shrink=0.5, aspect=5)
+plt.show()
+
+###zorder for grid
+#bar_width=0.5
+#plt.bar(x, crime, width = bar_width, color = 'red', zorder = 2)
+#plt.bar(x + bar_width, lit, width = bar_width, color = 'blue', zorder = 2)
+#plt.bar(x + bar_width*2, bpl, width = bar_width, color = 'green', zorder = 2)
+#plt.show()
 #plt.bar(bpl,lit)
 #plt.show()
 #plt.bar(bpl,crime)
 #plt.show()
 #plt.scatter(bpl,lit)
 #plt.show()
-#plt.scatter(lit,bpl)
+#plt.scatter(lit,crime)
 #plt.show()
 #plt.hist(crime, bins = 20)
 #plt.show()
@@ -382,8 +417,8 @@ for row in  calc_data:
 #plt.hist(bpl, bins = 20)
 #plt.show()
 
-csvfile = "C:\Users\Lenovo\Anaconda2\Final.csv"
-with open(csvfile, "w") as output:
-    writer = csv.writer(output, lineterminator='\n')
-    writer.writerows(new_comb_data)
+#csvfile = "C:\Users\Lenovo\Anaconda2\Final.csv"
+#with open(csvfile, "w") as output:
+#    writer = csv.writer(output, lineterminator='\n')
+#    writer.writerows(new_comb_data)
 
